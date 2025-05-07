@@ -1,0 +1,73 @@
+import numpy as np
+import random
+
+# Distance Matrix for 5 cities
+distances = np.array([
+    [0, 2, 9, 10, 7],
+    [1, 0, 6, 4, 3],
+    [15, 7, 0, 8, 9],
+    [6, 3, 12, 0, 11],
+    [10, 4, 8, 9, 0]
+])
+
+# Parameters
+num_ants = 10
+num_iterations = 100
+alpha = 1       # Pheromone influence
+beta = 2        # Distance influence
+evaporation = 0.5
+Q = 100
+
+num_cities = len(distances)
+pheromone = np.ones((num_cities, num_cities))
+
+def route_distance(route):
+    return sum(distances[route[i], route[i+1]] for i in range(len(route) - 1)) + distances[route[-1], route[0]]
+
+def select_next_city(visited, current_city):
+    probabilities = []
+    for j in range(num_cities):
+        if j in visited:
+            probabilities.append(0)
+        else:
+            prob = (pheromone[current_city][j] ** alpha) * ((1 / distances[current_city][j]) ** beta)
+            probabilities.append(prob)
+    probabilities = probabilities / np.sum(probabilities)
+    return np.random.choice(range(num_cities), p=probabilities)
+
+best_route = None
+best_distance = float('inf')
+
+for iteration in range(num_iterations):
+    all_routes = []
+    all_distances = []
+
+    for ant in range(num_ants):
+        visited = []
+        current = random.randint(0, num_cities - 1)
+        visited.append(current)
+
+        for _ in range(num_cities - 1):
+            next_city = select_next_city(visited, current)
+            visited.append(next_city)
+            current = next_city
+
+        all_routes.append(visited)
+        dist = route_distance(visited)
+        all_distances.append(dist)
+
+        if dist < best_distance:
+            best_distance = dist
+            best_route = visited
+
+    # Update pheromones
+    pheromone *= (1 - evaporation)
+    for route, dist in zip(all_routes, all_distances):
+        for i in range(len(route)):
+            from_city = route[i]
+            to_city = route[(i + 1) % num_cities]
+            pheromone[from_city][to_city] += Q / dist
+            pheromone[to_city][from_city] += Q / dist
+
+print("Best route found:", best_route + [best_route[0]])
+print("Shortest distance:", best_distance)

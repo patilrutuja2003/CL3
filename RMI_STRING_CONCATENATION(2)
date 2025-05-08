@@ -71,3 +71,28 @@ if __name__ == "__main__":
 #OUTPUT: Enter the first string:  Hello
 Enter the second string:  World!
 Concatenated Result: HelloWorld!
+
+
+"""
+Algorithm:
+
+Server:
+
+Initialize Pyro Daemon: Create a Pyro Daemon to manage remote object requests.
+Locate Name Server: Find the running Pyro Name Server.
+Create Server Object: Instantiate the StringConcatenationServer class.
+Register Server Object: Register the server object with the Daemon, obtaining a unique URI.
+Register with Name Server: Register the server object's URI with the Name Server under a logical name ("string.concatenation").
+Save URI (Optional but used in the provided code): Write the server's URI to a file for the client to read.
+Start Request Loop: Enter the Daemon's request loop to listen for and process incoming client calls.
+
+Client:
+
+Import Pyro4: Import the Pyro4 library.
+Read Server URI (If using the file method): Read the server's URI from the "server_uri.txt" file.
+Create Proxy: Create a Pyro4.Proxy object using the obtained server URI to connect to the remote server object.
+Get Input: Prompt the user to enter two strings.
+Invoke Remote Method: Call the concatenate_strings method on the proxy object, passing the input strings as arguments. This call is transparently sent to the server.
+Receive Result: The server executes the concatenate_strings method and returns the concatenated string, which is received by the client through the proxy.
+Display Result: Print the received concatenated string.
+"""

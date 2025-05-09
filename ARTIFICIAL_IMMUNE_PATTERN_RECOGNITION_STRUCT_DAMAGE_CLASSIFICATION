@@ -42,3 +42,36 @@ predictions = airs.predict(test_data)
 # Evaluate accuracy
 accuracy = np.mean(predictions == test_labels)
 print(f"Accuracy: {accuracy}")
+
+"""
+AIRS Algorithm (Step-by-Step)
+Initialization:
+
+Randomly generate an initial set of memory cells (detectors).
+
+Affinity Calculation:
+
+Measure similarity (or distance) between input samples and memory cells.
+
+Clonal Selection:
+
+Select the best-matching memory cells.
+
+Clone them based on their affinity (better = more clones).
+
+Hypermutation:
+
+Apply mutation to the clones (more mutation for lower affinity).
+
+Selection:
+
+Evaluate clones and replace weak memory cells with better ones.
+
+Classification:
+
+For a new sample, find the closest matching memory cell and assign its label.
+
+Evaluation:
+
+Compare predictions with true labels to calculate accuracy or performance.
+"""

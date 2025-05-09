@@ -71,3 +71,46 @@ for iteration in range(num_iterations):
 
 print("Best route found:", best_route + [best_route[0]])
 print("Shortest distance:", best_distance)
+
+
+"""
+In Ant Colony Optimization (ACO), a pheromone trial refers to:
+
+ The process of ants leaving pheromone on paths they take, which influences the probability of future ants choosing the same path.
+
+In short:
+Pheromone trail = A memory marker.
+
+More pheromone = More attractive that path becomes.
+
+Ants choose paths based on pheromone intensity + heuristic info.
+
+This helps the algorithm converge toward the best solution over time.
+
+"""
+"""
+ALGORITHM
+1Initialize pheromones on all paths.
+
+2Place ants randomly on nodes (starting points).
+
+3For each ant:
+
+Build a solution by choosing the next node based on:
+
+Pheromone level (trail strength)
+
+Heuristic info (e.g., distance or cost)
+
+4Evaluate the solution (e.g., total path length).
+
+5Update pheromones:
+
+Increase on good paths (reward).
+
+Evaporate (decrease) all pheromones to avoid over-convergence.
+
+6Repeat steps 3–5 for several iterations.
+
+7Return the best solution found.
+"""

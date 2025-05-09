@@ -25,6 +25,8 @@ style_image = load_image('monet.jpeg')
 content_image.shape
 
 plt.imshow(np.squeeze(content_image))
+
+
 plt.show()
 
 plt.imshow(np.squeeze(style_image))
@@ -36,3 +38,37 @@ plt.imshow(np.squeeze(stylized_image))
 plt.show()
 
 cv2.imwrite('generated_img.jpg', cv2.cvtColor(np.squeeze(stylized_image)*255, cv2.COLOR_BGR2RGB))
+
+
+"""
+ALGORITHM
+1Import Libraries & Load Pretrained Model
+
+Use tensorflow_hub to load a pretrained style transfer model.
+
+2Load Content and Style Images
+
+Read both images from disk.
+
+Convert them to tensors and normalize pixel values.
+
+3Preprocess Images
+
+Resize and add batch dimension (img[tf.newaxis, :]).
+
+4Visualize Input Images (Optional)
+
+Use matplotlib to show content and style images.
+
+5Apply Style Transfer
+
+Pass both content and style images into the model.
+
+Get the stylized output.
+
+6Display and Save Output
+
+Show the stylized image using matplotlib.
+
+Save the result using cv2.imwrite().
+"""

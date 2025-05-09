@@ -45,3 +45,43 @@ for gen in range(generations):
 # Final result
 best_solution = max(population, key=objective_function)
 print(f"\nBest solution: x = {best_solution:.4f}, f(x) = {objective_function(best_solution):.4f}")
+
+
+"""
+ALGORITHM
+Generate Initial Population:
+
+Randomly create 10 values of x in the range [0, 1].
+
+Evaluate Fitness:
+
+Use the objective function to measure how "good" each x is (higher = better).
+
+Clone and Mutate:
+
+Sort population by fitness.
+
+Clone each value 5 times.
+
+Apply mutation (small random change), smaller for better ones.
+
+Select New Population:
+
+From all mutated clones, pick the top 10 best ones.
+
+Repeat:
+
+Run this process for 20 generations.
+
+Result:
+
+Print the best x found and its corresponding function value.
+
+# Key Concepts Used:
+Cloning: Copying good solutions.
+
+Mutation: Slight change to explore nearby values.
+
+Selection: Keep only the best candidates.
+
+"""
